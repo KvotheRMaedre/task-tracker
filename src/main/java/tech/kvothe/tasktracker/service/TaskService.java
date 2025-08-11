@@ -88,6 +88,21 @@ public class TaskService {
         printMsg("Task updated successfully (ID: "+ id +")");
     }
 
+    public void changeStatus(String id, Status status) {
+        var task = listTask.stream()
+                .filter(t -> t.getId() == Long.parseLong(id))
+                .findFirst();
+
+        if (task.isEmpty()) {
+            printMsg("Theres no task with this id: " + id);
+            return;
+        }
+
+        task.get().setStatus(status);
+        task.get().setUpdatedAt(Instant.now());
+        printMsg("Task updated successfully (ID: "+ id +")");
+    }
+
     public void delete(String id) {
         var task = listTask.stream()
                 .filter(t -> t.getId() == Long.parseLong(id))
@@ -134,7 +149,7 @@ public class TaskService {
         String createdAtStr = taskFields[3].split("[a-z]:")[1].strip();
         String updatedAtStr = taskFields[4].split("[a-z]:")[1].strip();
 
-        Status status = Status.valueOf(statusString.toUpperCase().replace(" ", "_"));
+        Status status = Status.valueOf(statusString.toUpperCase().replace("-", "_"));
 
         Task task = new Task(
                 Long.parseLong(id),
