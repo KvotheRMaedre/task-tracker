@@ -117,6 +117,18 @@ public class TaskService {
         printMsg("Task deleted successfully (ID: "+ id +")");
     }
 
+    public void getAll() {
+        if (listTask.isEmpty()) {
+            printMsg("There is no tasks at the moment!");
+            return;
+        }
+
+        System.out.println("List of all tasks:");
+        listTask.forEach(task -> {
+            printMsg(createJsonFromTask(task));
+        });
+    }
+
     public void save() {
         if (listTask.isEmpty())
             return;
