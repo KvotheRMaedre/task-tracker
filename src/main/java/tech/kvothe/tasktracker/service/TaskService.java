@@ -118,6 +118,9 @@ public class TaskService {
     }
 
     public void save() {
+        if (listTask.isEmpty())
+            return;
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[\n");
         for (int i = 0; i < listTask.size(); i++){
