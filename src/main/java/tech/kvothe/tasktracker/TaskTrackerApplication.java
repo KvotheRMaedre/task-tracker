@@ -16,7 +16,7 @@ public class TaskTrackerApplication {
         final Path FILE_PATH = Path.of("tasks.json");
         final TaskService taskService = new TaskService(FILE_PATH);
 
-        String[] cliCommands = {"list", "List all tasks"};
+        String[] cliCommands = {"list", "in-progress"};
 
         if (cliCommands.length == 0){
             printMsg("Command: java -cp bin tech/kvothe/tasktracker/TaskTrackerApplication <command> <args>");
@@ -65,7 +65,26 @@ public class TaskTrackerApplication {
                 taskService.changeStatus(cliCommands[1], Status.DONE);
                 break;
             case "list":
-                taskService.getAll();
+
+                if (cliCommands.length >= 2) {
+                    switch (cliCommands[1]) {
+                        case "done":
+                            taskService.getByStatus(Status.DONE);
+                            break;
+                        case "in-progress":
+                            taskService.getByStatus(Status.IN_PROGRESS);
+                            break;
+                        case "todo":
+                            taskService.getByStatus(Status.TODO);
+                            break;
+                        default:
+                            taskService.getAll();
+                            break;
+                    }
+
+                } else {
+                    taskService.getAll();
+                }
                 break;
             default:
                 printMsg("Command: java -cp bin tech/kvothe/tasktracker/TaskTrackerApplication <command> <args>");

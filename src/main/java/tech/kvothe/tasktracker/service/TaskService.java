@@ -129,6 +129,17 @@ public class TaskService {
         });
     }
 
+    public void getByStatus(Status status) {
+        var response = listTask.stream().filter(task -> task.getStatus() == status).toList();
+
+        if (response.isEmpty()){
+            printMsg("There's not tasks with " + status.getDescription() + " status.");
+        }
+        response.forEach(task -> {
+            printMsg(createJsonFromTask(task));
+        });
+    }
+
     public void save() {
         if (listTask.isEmpty())
             return;
