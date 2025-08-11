@@ -193,12 +193,12 @@ public class TaskService {
     }
 
     public String createJsonFromTask(Task task) {
-        return "{\n" +
-                "\t\"id\": \"" + task.getId() + "\",\n" +
-                "\t\"description\": \"" + task.getDescription() + "\",\n" +
-                "\t\"status\": \"" + task.getStatus().getDescription() + "\",\n" +
-                "\t\"createdAt\": \"" + task.getCreatedAt() + "\",\n" +
-                "\t\"updatedAt\": \"" + task.getUpdatedAt() + "\"\n" +
-                "}";
+        return "\t{\n" +
+                "\t\t\"id\": \"" + task.getId() + "\",\n" +
+                "\t\t\"description\": \"" + task.getDescription() + "\",\n" +
+                "\t\t\"status\": \"" + task.getStatus().getDescription() + "\",\n" +
+                "\t\t\"createdAt\": \"" + task.getCreatedAt() + "\",\n" +
+                "\t\t\"updatedAt\": \"" + task.getUpdatedAt() + "\"\n" +
+                "\t}";
     }
 }
